@@ -4,23 +4,22 @@ services:
   - docker
 
 before_install:
-  - docker build -t mlaks/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t mlokeshvarma/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true mlaks/react-test npm test
+  - docker run -e CI=true mlokeshvarma/react-test npm test
 
 after_success:
-  - docker build -t mlaks/multi-client ./client
-  - docker build -t mlaks/multi-nginx ./nginx
-  - docker build -t mlaks/multi-server ./server
-  - docker build -t mlaks/multi-worker ./worker
+  - docker build -t mlokeshvarma/multi-client ./client
+  - docker build -t mlokeshvarma/multi-nginx ./nginx
+  - docker build -t mlokeshvarma/multi-server ./server
+  - docker build -t mlokeshvarma/multi-worker ./worker
 
 #Log into the Docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
 #Take those images and pushed into docker hub
-  - docker push mlaks/multi-client
-  - docker push mlaks/multi-nginx
-  - docker push mlaks/multi-server
-  - docker push mlaks/multi-worker
-  
+  - docker push mlokeshvarma/multi-client
+  - docker push mlokeshvarma/multi-nginx
+  - docker push mlokeshvarma/multi-server
+  - docker push mlokeshvarma/multi-worker
